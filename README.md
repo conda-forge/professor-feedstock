@@ -1,11 +1,11 @@
-About professor
-===============
+About professor-feedstock
+=========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/professor-feedstock/blob/main/LICENSE.txt)
 
 Home: https://professor.hepforge.org
 
 Package license: GPL-3.0-only
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/professor-feedstock/blob/main/LICENSE.txt)
 
 Summary: A tuning tool for Monte Carlo event generators
 
