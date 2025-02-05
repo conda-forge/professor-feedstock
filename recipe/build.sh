@@ -1,5 +1,5 @@
 #!/bin/bash
-./configure
+./configure --with-eigen=${PREFIX}
 make
 make install
 
