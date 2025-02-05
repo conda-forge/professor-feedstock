@@ -14,7 +14,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [win or py>39]
+  skip: true  # [win]
 
 requirements:
   build:
@@ -26,11 +26,12 @@ requirements:
     - cython
     - pip
     - eigen
+    - numpy
   run:
     - python
     - emcee
     - h5py
-    - iminuit ==1.5.4
+    - iminuit
     - ipython
     - matplotlib-base
     - numpy
