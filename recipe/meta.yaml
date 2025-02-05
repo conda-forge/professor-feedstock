@@ -1,5 +1,5 @@
 {% set name = "Professor" %}
-{% set version = "2.4.0" %}
+{% set version = "2.5.1" %}
 {% set tag = name|lower ~ "-" ~ version %}
 
 package:
@@ -8,28 +8,30 @@ package:
 
 source:
   url: https://gitlab.com/hepcedar/professor/-/archive/{{ tag }}/professor-{{ tag }}.tar.gz
-  sha256: 8488f12a87080571837809b364864ce4ef079398089b6ea071def30ae43941aa
+  sha256: c49174d1e4117da13083928a57e9bd6a52be25b9ccadee620315742f8e6b9430
   patches:
     - 0001-Fix-LC_ID_DYLIB-on-macOS.patch
 
 build:
-  number: 1
-  skip: true  # [win or py>39]
+  number: 0
+  skip: true  # [win or osx or py>311]
 
 requirements:
   build:
     - {{ compiler('cxx') }}
+    - {{ stdlib("c") }}
     - make
   host:
     - python
     - cython
     - pip
     - eigen
+    - numpy
   run:
     - python
     - emcee
     - h5py
-    - iminuit ==1.5.4
+    - iminuit
     - ipython
     - matplotlib-base
     - numpy
