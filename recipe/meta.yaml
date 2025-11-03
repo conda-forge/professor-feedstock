@@ -25,6 +25,7 @@ requirements:
     - python
     - cython
     - pip
+    - setuptools
     - eigen
     - numpy
   run:
