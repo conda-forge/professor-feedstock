@@ -27,6 +27,7 @@ requirements:
     - pip
     - setuptools
     - eigen
+    - eigen-abi-devel
     - numpy
   run:
     - python
