@@ -14,7 +14,6 @@ source:
 
 build:
   number: 0
-  cxx_std: 14
   skip: true  # [win or osx or py>311]
 
 requirements:
