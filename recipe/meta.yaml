@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://gitlab.com/hepcedar/professor/-/archive/{{ tag }}/professor-{{ tag }}.tar.gz
-  sha256: a05fcb1e4358d9b6514dd64dec5b82218fa702dcf401ca9f760b4720d919b32e
+  sha256: f8d89038141387c39c9e372ee710d9942770c24cab17f6914104b0374a649df7
   patches:
     - 0001-Fix-LC_ID_DYLIB-on-macOS.patch
 
