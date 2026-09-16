@@ -11,7 +11,7 @@ source:
   url: https://gitlab.com/hepcedar/professor/-/archive/professor-${{ version }}/professor-professor-${{ version }}.tar.gz
   sha256: 201b95e701d1ac6071ba27968a6617fe7b8a2f481112d7a0eb4dc90d4f94f5e2
   patches:
-    - 0001-Fix-LC_ID_DYLIB-on-macOS.patch
+    - update-to-python3.patch
 
 build:
   number: 1
