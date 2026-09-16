@@ -19,6 +19,8 @@ build:
     - win
 
 requirements:
+  run_exports:
+    - ${{ pin_subpackage("professor", upper_bound="x.x") }}
   build:
     - ${{ stdlib("c") }}
     - ${{ compiler("cxx") }}
