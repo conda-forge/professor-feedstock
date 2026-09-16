@@ -1,0 +1,133 @@
+schema_version: 1
+
+context:
+  version: "2.5.9"
+
+package:
+  name: professor
+  version: ${{ version }}
+
+source:
+  url: https://gitlab.com/hepcedar/professor/-/archive/professor-${{ version }}/professor-professor-${{ version }}.tar.gz
+  sha256: 201b95e701d1ac6071ba27968a6617fe7b8a2f481112d7a0eb4dc90d4f94f5e2
+  patches:
+    - update-to-python3.patch
+
+build:
+  number: 1
+  skip:
+    - win
+
+requirements:
+  run_exports:
+    - ${{ pin_subpackage("professor", upper_bound="x.x") }}
+  build:
+    - ${{ stdlib("c") }}
+    - ${{ compiler("cxx") }}
+    - make
+    - sed
+    - pkg-config
+    - gnuconfig
+    - if: build_platform != target_platform
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+        - cython
+  host:
+    - python
+    - cython
+    - pip
+    - setuptools
+    - eigen
+  run:
+    - python
+    - emcee
+    - h5py
+    - iminuit
+    - matplotlib-base
+    - numpy
+    - pydoe
+    - pyyaml
+    - scikit-learn
+    - scipy
+    - sympy
+    - tabulate
+    - yoda
+
+tests:
+  - package_contents:
+      bin:
+        - prof2-ls
+        - prof2-ipol
+        - prof2-tune
+        - prof2-sample
+        - prof2-config
+      lib:
+        - Professor2
+      include:
+        - Professor/Professor.h
+
+  - python:
+      imports:
+        - professor2
+        - professor2.core
+      pip_check: true
+
+  - script:
+      - prof2-ls --help
+      - prof2-ipol --help
+      - prof2-tune --help
+      - prof2-sample --help
+
+      - prof2-bootstrap --help
+      - prof2-config --help
+      - prof2-eigentunes --help
+      - prof2-envelopes --help
+      - prof2-ipol --help
+      - prof2-ls --help
+      - prof2-ncoeffs --help
+      - prof2-predict --help
+      - prof2-residuals --help
+      - prof2-runcombs --help
+      - prof2-sample --help
+      - prof2-sens --help
+      - prof2-tune --help
+
+      - prof2-config --help
+      - prof2-config --prefix
+      - prof2-config --includedir
+      - prof2-config --libdir
+      - prof2-config --cppflags
+      - prof2-config --ldflags
+      - prof2-config --version
+
+      - test "$(prof2-config --version)" = "${PKG_VERSION}"
+
+  - files:
+      source:
+        - test/testIpol.cc
+    requirements:
+      run:
+        - cxx-compiler
+    script:
+      # Minimal compiler activation does not export CXX, so fall back to the
+      # host-prefixed driver (x86_64-conda-linux-gnu-c++, *-apple-darwin*-clang++).
+      - CXX="${CXX:-$(ls "${PREFIX}"/bin/*-c++ "${PREFIX}"/bin/*-clang++ 2>/dev/null | head -n1)}"
+      - $CXX -std=c++17 $(prof2-config --cppflags) test/testIpol.cc $(prof2-config --ldflags) -o testIpol
+      - ./testIpol
+
+about:
+  summary: A tuning tool for Monte Carlo event generators
+  description: |
+    Professor is a tuning tool for Monte Carlo event generators, based on the ideas
+    described in "Tuning and Test of Fragmentation Models Based on Identified
+    Particles and Precision Event Shape Data" (Z. Phys., C73 (1996) 11-60).
+  license: GPL-3.0-only
+  license_file: LICENSE
+  homepage: https://professor.hepforge.org
+  repository: https://gitlab.com/hepcedar/professor
+  documentation: https://professor.hepforge.org/
+
+extra:
+  recipe-maintainers:
+    - admorris
