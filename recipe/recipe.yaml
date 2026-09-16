@@ -42,16 +42,14 @@ requirements:
     - emcee
     - h5py
     - iminuit
-    - ipython
     - matplotlib-base
     - numpy
     - pydoe
-    - pymultinest
+    - pyyaml
     - scikit-learn
     - scipy
     - sympy
     - tabulate
-    - wxpython
     - yoda
 
 tests:
@@ -83,20 +81,15 @@ tests:
       - prof2-config --help
       - prof2-eigentunes --help
       - prof2-envelopes --help
-      - prof2-errors --help
-      - prof2-I --help
       - prof2-ipol --help
-      - prof2-jackknife --help
       - prof2-ls --help
       - prof2-ncoeffs --help
-      - prof2-plotspace --help
       - prof2-predict --help
       - prof2-residuals --help
       - prof2-runcombs --help
       - prof2-sample --help
       - prof2-sens --help
       - prof2-tune --help
-      - prof2-tune-nest --help
 
       - prof2-config --help
       - prof2-config --prefix
