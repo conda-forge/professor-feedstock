@@ -14,7 +14,7 @@ source:
     - update-to-python3.patch
 
 build:
-  number: 1
+  number: 2
   skip:
     - win
 
